@@ -2,6 +2,7 @@ import {Box, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, List
 import { Link } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
+import {Web3Button} from "@web3modal/react";
 
 const categories = [
     {
@@ -59,6 +60,9 @@ const LeftNavbar = () => {
                         <Divider sx={{mt: 2}}/>
                     </Box>
                 ))}
+                <ListItem>
+                    <Web3Button />
+                </ListItem>
             </List>
         </Drawer>
     );
