@@ -1,7 +1,12 @@
+import {useLocation} from "react-router-dom";
+
 const AppHeader = () => {
+
+    const location = useLocation();
+
     return (
         <>
-            <div>App header</div>
+            <div>{location.pathname}</div>
         </>
     );
 };

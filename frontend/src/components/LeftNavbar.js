@@ -1,7 +1,10 @@
 import {Box, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
-import InfoIcon from '@mui/icons-material/Info';
+import PaymentsIcon from '@mui/icons-material/Payments';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import AddTaskIcon from '@mui/icons-material/AddTask';
+import TaskIcon from '@mui/icons-material/Task';
 import {Web3Button} from "@web3modal/react";
 
 const categories = [
@@ -10,10 +13,13 @@ const categories = [
         children: [
             {
                 id: 'Home',
-                icon: <HomeIcon />,
+                icon: <HomeIcon/>,
                 to: '/',
             },
-            { id: 'About', icon: <InfoIcon />, to: '/about' },
+            {id: 'Token', icon: <PaymentsIcon/>, to: '/token'},
+            {id: 'All Tasks', icon: <AssignmentIcon/>, to: '/tasks'},
+            {id: 'My Opened Tasks', icon: <TaskIcon/>, to: '/mytasks'},
+            {id: 'Create Task', icon: <AddTaskIcon/>, to: '/newtask'},
         ],
     }
 ];
@@ -61,7 +67,7 @@ const LeftNavbar = () => {
                     </Box>
                 ))}
                 <ListItem>
-                    <Web3Button />
+                    <Web3Button/>
                 </ListItem>
             </List>
         </Drawer>

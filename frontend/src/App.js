@@ -8,10 +8,10 @@ import AppRoutes from "./routes/AppRoutes";
 import AppHeader from "./components/AppHeader";
 import {Web3Modal} from "@web3modal/react";
 import {configureChains, createClient, WagmiConfig} from "wagmi";
-import {bscTestnet} from 'wagmi/chains'
+import {bscTestnet, hardhat} from 'wagmi/chains'
 import {EthereumClient, w3mConnectors, w3mProvider} from "@web3modal/ethereum";
 
-const chains = [bscTestnet]
+const chains = [bscTestnet, hardhat]
 const projectId = '8ae42c74efe257f44de9ff5631a9245e';
 
 const {provider} = configureChains(chains, [w3mProvider({projectId})]);
