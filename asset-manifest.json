@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.js": "/dapp-rewards/static/js/main.be9ae2a7.js",
+    "static/js/151.7f962374.chunk.js": "/dapp-rewards/static/js/151.7f962374.chunk.js",
+    "static/js/473.d627bddd.chunk.js": "/dapp-rewards/static/js/473.d627bddd.chunk.js",
+    "static/js/883.d53477ca.chunk.js": "/dapp-rewards/static/js/883.d53477ca.chunk.js",
+    "static/js/774.64813651.chunk.js": "/dapp-rewards/static/js/774.64813651.chunk.js",
+    "static/js/501.4a99c0e0.chunk.js": "/dapp-rewards/static/js/501.4a99c0e0.chunk.js",
+    "static/js/741.c2b13b7a.chunk.js": "/dapp-rewards/static/js/741.c2b13b7a.chunk.js",
+    "static/js/425.9c3ee393.chunk.js": "/dapp-rewards/static/js/425.9c3ee393.chunk.js",
+    "index.html": "/dapp-rewards/index.html",
+    "main.be9ae2a7.js.map": "/dapp-rewards/static/js/main.be9ae2a7.js.map",
+    "151.7f962374.chunk.js.map": "/dapp-rewards/static/js/151.7f962374.chunk.js.map",
+    "473.d627bddd.chunk.js.map": "/dapp-rewards/static/js/473.d627bddd.chunk.js.map",
+    "774.64813651.chunk.js.map": "/dapp-rewards/static/js/774.64813651.chunk.js.map",
+    "501.4a99c0e0.chunk.js.map": "/dapp-rewards/static/js/501.4a99c0e0.chunk.js.map",
+    "741.c2b13b7a.chunk.js.map": "/dapp-rewards/static/js/741.c2b13b7a.chunk.js.map",
+    "425.9c3ee393.chunk.js.map": "/dapp-rewards/static/js/425.9c3ee393.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.be9ae2a7.js"
+  ]
+}
