@@ -58,4 +58,12 @@ contract RewardsTask is AccessControl {
         return payee;
     }
 
+    function getDescription() public view returns (string memory){
+        return description;
+    }
+
+    function getIsCompleted() public view returns (bool){
+        return isCompleted;
+    }
+
 }

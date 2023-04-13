@@ -11,6 +11,7 @@
     "@reduxjs/toolkit": "^1.9.3",
     "@web3modal/ethereum": "^2.2.2",
     "@web3modal/react": "^2.2.2",
+    "dotenv": "^16.0.3",
     "ethers": "^5.7.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -19,7 +20,9 @@
     "react-scripts": "5.0.1",
     "wagmi": "^0.12.10",
     "web3modal": "^1.9.12",
-    "dotenv": "^16.0.3"
+    "tokenAbiJson": "file:../artifacts/contracts/RewardsToken.sol/RewardsToken.json",
+    "taskAbiJson": "file:../artifacts/contracts/RewardsTask.sol/RewardsTask.json",
+    "managementAbiJson": "file:../artifacts/contracts/RewardsManagement.sol/RewardsManagement.json"
   },
   "scripts": {
     "start": "react-scripts start",

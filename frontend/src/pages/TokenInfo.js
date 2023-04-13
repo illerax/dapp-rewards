@@ -1,19 +1,36 @@
 import {Paper, Table, TableBody, TableCell, TableContainer, TableRow} from "@mui/material";
 import {REWARD_TOKEN_CONTRACT_ADDRESS} from "../constants";
-import {useContractRead} from "wagmi";
-import abi from "../abi/tokenAbi";
+import {useContractReads} from "wagmi";
+import tokenTaskJson from "tokenAbiJson";
 import {formatUnits} from "ethers/lib/utils";
 
 const TokenInfo = () => {
 
-    const name = useContractRead({address: REWARD_TOKEN_CONTRACT_ADDRESS, abi: abi, functionName: "name"}).data;
-    const symbol = useContractRead({address: REWARD_TOKEN_CONTRACT_ADDRESS, abi: abi, functionName: "symbol"}).data;
-    const decimals = useContractRead({address: REWARD_TOKEN_CONTRACT_ADDRESS, abi: abi, functionName: "decimals"}).data;
-    const totalSupply = formatUnits(useContractRead({
+    const tokenContract = {
         address: REWARD_TOKEN_CONTRACT_ADDRESS,
-        abi: abi,
-        functionName: "totalSupply"
-    }).data ?? 0);
+        abi: tokenTaskJson.abi,
+    }
+
+    const {data} = useContractReads({
+        contracts: [
+            {
+                ...tokenContract,
+                functionName: 'name',
+            },
+            {
+                ...tokenContract,
+                functionName: 'symbol',
+            },
+            {
+                ...tokenContract,
+                functionName: 'decimals',
+            },
+            {
+                ...tokenContract,
+                functionName: 'totalSupply',
+            }
+        ],
+    });
 
     return (
         <TableContainer component={Paper} variant="outlined">
@@ -25,19 +42,19 @@ const TokenInfo = () => {
                     </TableRow>
                     <TableRow key="token-name">
                         <TableCell align="right" component="th" scope="row">Name:</TableCell>
-                        <TableCell align="left">{name}</TableCell>
+                        <TableCell align="left">{data ? data[0] : ""}</TableCell>
                     </TableRow>
                     <TableRow key="token-symbol">
                         <TableCell align="right" component="th" scope="row">Symbol:</TableCell>
-                        <TableCell align="left">{symbol}</TableCell>
+                        <TableCell align="left">{data ? data[1] : ""}</TableCell>
                     </TableRow>
                     <TableRow key="token-decimals">
                         <TableCell align="right" component="th" scope="row">Decimals:</TableCell>
-                        <TableCell align="left">{decimals}</TableCell>
+                        <TableCell align="left">{data ? data[2] : ""}</TableCell>
                     </TableRow>
                     <TableRow key="token-total-supply">
                         <TableCell align="right" component="th" scope="row">Total supply:</TableCell>
-                        <TableCell align="left">{totalSupply}</TableCell>
+                        <TableCell align="left">{formatUnits(data ? data[3] : "" ?? 0)}</TableCell>
                     </TableRow>
                 </TableBody>
             </Table>

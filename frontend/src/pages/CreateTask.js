@@ -2,7 +2,7 @@ import {Box, Button, TextField, Typography} from "@mui/material";
 import {useState} from "react";
 import {useContractWrite, usePrepareContractWrite} from "wagmi";
 import {REWARD_MANAGEMENT_CONTRACT_ADDRESS, REWARD_TOKEN_CONTRACT_ADDRESS} from "../constants";
-import abi from "../abi/managementAbi";
+import managementTaskJson from "managementAbiJson";
 
 const CreateTask = () => {
 
@@ -15,7 +15,7 @@ const CreateTask = () => {
 
     const {config} = usePrepareContractWrite({
         address: REWARD_MANAGEMENT_CONTRACT_ADDRESS,
-        abi: abi,
+        abi: managementTaskJson.abi,
         functionName: 'createTask',
         args: [
             description,
@@ -39,8 +39,7 @@ const CreateTask = () => {
                            margin="normal"
                            fullWidth
                            multiline
-                           rows={5}
-                           maxRows={10}/>
+                           rows={5}/>
             </div>
             <div>
                 <TextField label="Reward"

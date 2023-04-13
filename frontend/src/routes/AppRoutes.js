@@ -4,6 +4,7 @@ import TokenInfo from "../pages/TokenInfo";
 import AllTasks from "../pages/AllTasks";
 import UserTasks from "../pages/UserTasks";
 import CreateTask from "../pages/CreateTask";
+import ShowTask from "../pages/ShowTask";
 
 const AppRoutes = () => {
     return (
@@ -11,6 +12,7 @@ const AppRoutes = () => {
             <Route exact path="/" element={<Home/>}/>
             <Route path="/token" element={<TokenInfo/>}/>
             <Route path="/tasks" element={<AllTasks/>}/>
+            <Route path="/tasks/:address" element={<ShowTask/>}/>
             <Route path="/mytasks" element={<UserTasks/>}/>
             <Route path="/newtask" element={<CreateTask/>}/>
         </Routes>

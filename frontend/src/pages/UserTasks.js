@@ -1,12 +1,12 @@
 import {Paper, Table, TableBody, TableCell, TableContainer, TableRow} from "@mui/material";
 import {useContractRead} from "wagmi";
 import {REWARD_MANAGEMENT_CONTRACT_ADDRESS} from "../constants";
-import abi from "../abi/managementAbi";
+import managementTaskJson from "managementAbiJson";
 
 const UserTasks = () => {
     const contracts = useContractRead({
         address: REWARD_MANAGEMENT_CONTRACT_ADDRESS,
-        abi: abi,
+        abi: managementTaskJson.abi,
         functionName: "getOwnerTasks"
     }).data;
 

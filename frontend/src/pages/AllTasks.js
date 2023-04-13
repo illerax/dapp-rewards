@@ -1,13 +1,14 @@
 import {Paper, Table, TableBody, TableCell, TableContainer, TableRow} from "@mui/material";
 import {useContractRead} from "wagmi";
 import {REWARD_MANAGEMENT_CONTRACT_ADDRESS} from "../constants";
-import abi from "../abi/managementAbi";
+import managementTaskJson from "managementAbiJson";
+import {Link} from "react-router-dom";
 
 const AllTasks = () => {
 
     const contracts = useContractRead({
         address: REWARD_MANAGEMENT_CONTRACT_ADDRESS,
-        abi: abi,
+        abi: managementTaskJson.abi,
         functionName: "getTasks"
     }).data;
 
@@ -18,7 +19,7 @@ const AllTasks = () => {
                     {contracts ? contracts.map((it, index) => {
                         return <TableRow key={`${it}-address`}>
                             <TableCell align="left" component="th" scope="row">{index}</TableCell>
-                            <TableCell align="left" component="th" scope="row">{it}</TableCell>
+                            <TableCell align="left" component="th" scope="row"><Link to={`/tasks/${it}`}>{it}</Link></TableCell>
                         </TableRow>
                     }) : ""}
                 </TableBody>
