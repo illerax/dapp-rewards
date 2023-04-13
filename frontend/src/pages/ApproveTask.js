@@ -65,19 +65,19 @@ const ApproveTask = () => {
             <TableContainer component={Paper} variant="outlined">
                 <Table size="small" aria-label="a dense table">
                     <TableBody>
-                        <TableRow key="token-address">
+                        <TableRow key="approve-task-token">
                             <TableCell align="right" component="th" scope="row">Reward token:</TableCell>
                             <TableCell align="left">{data ? <Link to={'/token'}>{data[0]}</Link> : ""}</TableCell>
                         </TableRow>
-                        <TableRow key="token-name">
+                        <TableRow key="approve-task-reward">
                             <TableCell align="right" component="th" scope="row">Reward amount:</TableCell>
                             <TableCell align="left">{formatUnits(data ? data[1] : 0)}</TableCell>
                         </TableRow>
-                        <TableRow key="token-symbol">
+                        <TableRow key="approve-task-description">
                             <TableCell align="right" component="th" scope="row">Description:</TableCell>
                             <TableCell align="left">{data ? data[2] : ""}</TableCell>
                         </TableRow>
-                        <TableRow key="token-symbol">
+                        <TableRow key="approve-task-payee">
                             <TableCell align="right" component="th" scope="row">Payee:</TableCell>
                             <TableCell
                                 align="left">{data && data[3] !== ethers.constants.AddressZero ? data[3] : ""}</TableCell>

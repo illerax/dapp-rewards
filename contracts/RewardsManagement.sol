@@ -50,8 +50,12 @@ contract RewardsManagement {
         return tasks;
     }
 
-    function getOwnerTasks(address owner) public view returns (RewardsTask[] memory){
-        return ownerTasks[owner];
+    function getOwnerTasks(address _owner) public view returns (RewardsTask[] memory){
+        return ownerTasks[_owner];
+    }
+
+    function getTaskOwner(RewardsTask _task) public view returns (address){
+        return taskOwners[_task];
     }
 
     function isRequireApproval(RewardsTask _task) public view returns (bool){

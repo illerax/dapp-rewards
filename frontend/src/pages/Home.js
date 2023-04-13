@@ -9,9 +9,6 @@ const Home = () => {
     return (
         <>
             <Typography variant="h4">Home</Typography>
-            <Typography variant="h6">{count}</Typography>
-            <Button onClick={() => dispatch(increment())}>Increment</Button>
-            <Button onClick={() => dispatch(decrement())}>Decrement</Button>
         </>
     );
 };
