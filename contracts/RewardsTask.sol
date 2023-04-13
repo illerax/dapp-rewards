@@ -43,7 +43,7 @@ contract RewardsTask is AccessControl {
 
     function reject() public onlyRole(APPROVER_ROLE) {
         emit Rejected(payee);
-        delete payee;
+        payee = address(0);
     }
 
     function getRewardToken() public view returns (address){

@@ -68,7 +68,7 @@ const ShowTask = () => {
             <div>
                 <Button size="medium"
                         disabled={isDisabled}
-                        onClick={() => write()}
+                        onClick={() => write?.()}
                         variant="contained">
                     Mark as completed
                 </Button>

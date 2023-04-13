@@ -52,7 +52,7 @@ const CreateTask = () => {
             </div>
             <div>
                 <Button size="medium"
-                        onClick={() => write()}
+                        onClick={() => write?.()}
                         variant="contained">
                     Create
                 </Button>
