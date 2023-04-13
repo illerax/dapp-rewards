@@ -50,8 +50,8 @@ contract RewardsManagement {
         return tasks;
     }
 
-    function getOwnerTasks() public view returns (RewardsTask[] memory){
-        return ownerTasks[msg.sender];
+    function getOwnerTasks(address owner) public view returns (RewardsTask[] memory){
+        return ownerTasks[owner];
     }
 
     function isRequireApproval(RewardsTask _task) public view returns (bool){

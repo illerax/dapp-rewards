@@ -24,12 +24,12 @@ describe("RewardsManagement", function () {
     describe("Create Task", function () {
 
         it("Should create rewards task", async function () {
-            const {contract, token} = await loadFixture(deployFixture);
+            const {contract, token, owner} = await loadFixture(deployFixture);
 
             const taskDescription = "test description";
             const taskReward = 123;
 
-            await contract.createTask(
+            await contract.connect(owner).createTask(
                 taskDescription,
                 taskReward,
                 token.address
@@ -37,7 +37,7 @@ describe("RewardsManagement", function () {
 
             expect(await contract.getTasks())
                 .to.have.lengthOf(1);
-            expect(await contract.getOwnerTasks())
+            expect(await contract.getOwnerTasks(owner.address))
                 .to.have.lengthOf(1);
 
             const tasks = await contract.getTasks();
@@ -131,7 +131,7 @@ describe("RewardsManagement", function () {
 
             expect(await contract.getTasks())
                 .to.have.lengthOf(0);
-            expect(await contract.connect(owner).getOwnerTasks())
+            expect(await contract.getOwnerTasks(owner.address))
                 .to.have.lengthOf(0);
 
             expect(await token.balanceOf(taskAddress))
