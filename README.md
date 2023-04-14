@@ -6,6 +6,8 @@ Rewards application on BNB Chain
 **Application**: [https://illerax.github.io/dapp-rewards/](https://illerax.github.io/dapp-rewards/)
 
 ## Contracts
+**Token Contract:**: [https://testnet.bscscan.com/address/0x015733614A4017C23F94658B41870acd1E8380D7](https://testnet.bscscan.com/address/0x015733614A4017C23F94658B41870acd1E8380D7)
+**Management Contract:**: [https://testnet.bscscan.com/address/0xCFAA10eD49dC51aF5dfbD6412d6413E6523CA6f7](https://testnet.bscscan.com/address/0xCFAA10eD49dC51aF5dfbD6412d6413E6523CA6f7)
 
 ### Development
 
