@@ -34,7 +34,9 @@ const TokenInfo = () => {
 
     return (
         <Box>
-            <Typography variant="h4">Show token</Typography>
+            <Box sx={{margin: 5}}>
+                <Typography variant="h4">Show token</Typography>
+            </Box>
             <TableContainer component={Paper} variant="outlined">
                 <Table size="small" aria-label="a dense table">
                     <TableBody>

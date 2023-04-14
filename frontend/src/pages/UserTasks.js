@@ -17,7 +17,9 @@ const UserTasks = () => {
 
     return (
         <Box>
-            <Typography variant="h4">My Opened Tasks</Typography>
+            <Box sx={{margin: 5}}>
+                <Typography variant="h4">Opened Tasks</Typography>
+            </Box>
             <TableContainer component={Paper} variant="outlined">
                 <Table size="small" aria-label="a dense table">
                     <TableHead>

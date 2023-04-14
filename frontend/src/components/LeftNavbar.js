@@ -10,7 +10,7 @@ import {indigo, neutral} from '../themes/colors';
 
 const categories = [
     {
-        id: 'Pages',
+        id: '>>>',
         children: [
             {
                 id: 'Home',
@@ -50,7 +50,7 @@ const LeftNavbar = () => {
                 }}>
             <List disablePadding>
                 <ListItem sx={{...item, ...itemCategory, fontSize: 22}}>
-                    Rewards
+                    Crypto Rewards
                 </ListItem>
                 {categories.map(({id, children}) => (
                     <Box key={id}>

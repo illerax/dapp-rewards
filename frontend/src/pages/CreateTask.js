@@ -65,8 +65,9 @@ const CreateTask = () => {
 
     return (
         <Box>
-            <Typography variant="h4">Create task</Typography>
-            <Typography variant="body1"></Typography>
+            <Box sx={{margin: 5}}>
+                <Typography variant="h4">Create task</Typography>
+            </Box>
             <div>
                 <TextField label="Task Description"
                            value={description}

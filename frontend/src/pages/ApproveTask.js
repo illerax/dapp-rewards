@@ -117,7 +117,9 @@ const ApproveTask = () => {
 
     return (
         <Box>
-            <Typography variant="h4">Approval</Typography>
+            <Box sx={{margin: 5}}>
+                <Typography variant="h4">Approval</Typography>
+            </Box>
             <TableContainer component={Paper} variant="outlined">
                 <Table size="small" aria-label="a dense table">
                     <TableBody>
@@ -141,7 +143,7 @@ const ApproveTask = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <div>
+            <Box sx={{marginTop: 5}}>
                 <Button size="medium"
                         disabled={isDisabled}
                         onClick={() => approve()}
@@ -149,13 +151,14 @@ const ApproveTask = () => {
                     Approve
                 </Button>
                 <Button size="medium"
+                        sx={{marginLeft: 3}}
                         disabled={isDisabled}
                         onClick={() => reject()}
                         variant="outlined"
                         color="error">
                     Reject
                 </Button>
-            </div>
+            </Box>
         </Box>
     );
 };

@@ -16,7 +16,9 @@ const AllTasks = () => {
 
     return (
         <Box>
-            <Typography variant="h4">All tasks</Typography>
+            <Box sx={{margin: 5}}>
+                <Typography variant="h4">All tasks</Typography>
+            </Box>
             <TableContainer component={Paper} variant="outlined">
                 <Table size="small" aria-label="a dense table">
                     <TableHead>

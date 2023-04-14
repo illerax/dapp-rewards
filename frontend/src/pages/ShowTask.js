@@ -76,7 +76,9 @@ const ShowTask = () => {
 
     return (
         <Box>
-            <Typography variant="h4">Show task</Typography>
+            <Box sx={{margin: 5}}>
+                <Typography variant="h4">Show task</Typography>
+            </Box>
             <TableContainer component={Paper} variant="outlined">
                 <Table size="small" aria-label="a dense table">
                     <TableBody>
@@ -95,14 +97,14 @@ const ShowTask = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <div>
+            <Box sx={{marginTop: 5}}>
                 <Button size="medium"
                         disabled={isDisabled}
                         onClick={() => completeTask()}
                         variant="contained">
                     Mark as completed
                 </Button>
-            </div>
+            </Box>
         </Box>
     );
 };
