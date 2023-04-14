@@ -1,13 +1,14 @@
 import {useLocation} from "react-router-dom";
+import {Box, Typography} from "@mui/material";
 
 const AppHeader = () => {
 
     const location = useLocation();
 
     return (
-        <>
-            <div>{location.pathname}</div>
-        </>
+        <Box>
+            <Typography variant="caption">{location.pathname}</Typography>
+        </Box>
     );
 };
 

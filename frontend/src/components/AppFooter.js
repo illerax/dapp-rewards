@@ -1,7 +1,7 @@
 const AppFooter = () => {
     return (
         <>
-            <div>App footer</div>
+            <div></div>
         </>
     );
 };

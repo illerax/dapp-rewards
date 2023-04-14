@@ -1,7 +1,7 @@
 import {ThemeProvider} from '@mui/material/styles';
 import {Backdrop, Box, CircularProgress, CssBaseline, StyledEngineProvider} from '@mui/material';
 import {HashRouter} from "react-router-dom";
-import AppTheme from "./themes/AppTheme";
+import {AppTheme} from "./themes/AppTheme";
 import LeftNavbar from "./components/LeftNavbar";
 import AppFooter from "./components/AppFooter";
 import AppRoutes from "./routes/AppRoutes";
@@ -13,6 +13,7 @@ import {EthereumClient, w3mConnectors, w3mProvider} from "@web3modal/ethereum";
 import {WALLET_CONNECT_CLOUD_PROJECT_ID} from "./constants";
 import AppModal from "./components/AppModal";
 import {useSelector} from "react-redux";
+import {indigo} from './themes/colors';
 
 const chains = [bscTestnet, hardhat]
 const projectId = WALLET_CONNECT_CLOUD_PROJECT_ID;
@@ -32,7 +33,7 @@ const App = () => {
     return (
         <> <WagmiConfig client={wagmiClient}>
             <StyledEngineProvider injectFirst>
-                <ThemeProvider theme={AppTheme}>
+                <ThemeProvider theme={AppTheme()}>
                     <AppModal/>
                     <Backdrop
                         sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
@@ -61,7 +62,13 @@ const App = () => {
                 </ThemeProvider>
             </StyledEngineProvider>
         </WagmiConfig>
-            <Web3Modal projectId={projectId} ethereumClient={ethereumClient}/>
+            <Web3Modal projectId={projectId}
+                       ethereumClient={ethereumClient}
+                       themeVariables={{
+                           '--w3m-font-family': 'Roboto, sans-serif',
+                           '--w3m-accent-color': indigo.main,
+                           '--w3m-background-color': indigo.main,
+                       }}/>
         </>
     );
 };

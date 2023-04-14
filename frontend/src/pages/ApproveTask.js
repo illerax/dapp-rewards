@@ -151,7 +151,8 @@ const ApproveTask = () => {
                 <Button size="medium"
                         disabled={isDisabled}
                         onClick={() => reject()}
-                        variant="contained">
+                        variant="outlined"
+                        color="error">
                     Reject
                 </Button>
             </div>

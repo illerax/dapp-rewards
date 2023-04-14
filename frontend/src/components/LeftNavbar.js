@@ -6,6 +6,7 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import TaskIcon from '@mui/icons-material/Task';
 import {Web3Button} from "@web3modal/react";
+import {indigo, neutral} from '../themes/colors';
 
 const categories = [
     {
@@ -25,7 +26,7 @@ const categories = [
 ];
 
 const item = {
-    py: '2px',
+    py: '10px',
     px: 3,
     color: 'rgba(0, 0, 0, 0.7)',
     '&:hover, &:focus': {
@@ -41,7 +42,12 @@ const itemCategory = {
 
 const LeftNavbar = () => {
     return (
-        <Drawer variant="permanent">
+        <Drawer variant="permanent"
+                PaperProps={{
+                    sx: {
+                        backgroundColor: indigo.light
+                    }
+                }}>
             <List disablePadding>
                 <ListItem sx={{...item, ...itemCategory, fontSize: 22}}>
                     Rewards
