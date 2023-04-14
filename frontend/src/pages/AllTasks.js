@@ -2,7 +2,9 @@ import {Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, Tabl
 import {useContractRead, useContractReads} from "wagmi";
 import {REWARD_MANAGEMENT_CONTRACT_ADDRESS} from "../constants";
 import managementTaskJson from "managementAbiJson";
+import rewardTaskJson from "taskAbiJson";
 import {Link} from "react-router-dom";
+import {formatUnits} from "ethers/lib/utils";
 
 const AllTasks = () => {
 
@@ -22,6 +24,8 @@ const AllTasks = () => {
                             <TableCell align="left">#</TableCell>
                             <TableCell align="left">Task</TableCell>
                             <TableCell align="left">Owner</TableCell>
+                            <TableCell align="left">Reward</TableCell>
+                            <TableCell align="left">Completed by</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -43,12 +47,25 @@ const TaskRow = ({address, index}) => {
         abi: managementTaskJson.abi,
     }
 
+    const contract = {
+        address: address,
+        abi: rewardTaskJson.abi,
+    }
+
     const {data} = useContractReads({
         contracts: [
             {
                 ...managementContract,
                 functionName: 'getTaskOwner',
                 args: [address]
+            },
+            {
+                ...contract,
+                functionName: 'getRewardAmount'
+            },
+            {
+                ...contract,
+                functionName: 'payee'
             }
         ],
     });
@@ -59,6 +76,8 @@ const TaskRow = ({address, index}) => {
             <TableCell align="left" component="th" scope="row"><Link
                 to={`/tasks/${address}`}>{address}</Link></TableCell>
             <TableCell align="left" component="th" scope="row">{data ? data[0] : ""}</TableCell>
+            <TableCell align="left" component="th" scope="row">{formatUnits(data ? data[1] : 0)}</TableCell>
+            <TableCell align="left" component="th" scope="row">{data ? data[2] : ""}</TableCell>
         </TableRow>
     );
 };
