@@ -1,8 +1,10 @@
 import {configureStore} from '@reduxjs/toolkit'
-import counterReducer from './counterSlice'
+import backdropReducer from './backdropSlice'
+import modalReducer from './modalSlice'
 
 export default configureStore({
     reducer: {
-        counter: counterReducer,
+        backdrop: backdropReducer,
+        modal: modalReducer,
     },
 })

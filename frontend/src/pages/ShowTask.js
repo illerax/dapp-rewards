@@ -1,20 +1,25 @@
 import {Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography} from "@mui/material";
-import {useContractReads, useContractWrite, usePrepareContractWrite} from "wagmi";
+import {useAccount, useContractReads, useContractWrite, usePrepareContractWrite, useWaitForTransaction} from "wagmi";
 import rewardTaskJson from "taskAbiJson";
 import {Link, useParams} from "react-router-dom";
 import {formatUnits} from "ethers/lib/utils";
 import {ethers} from "ethers";
+import {useDispatch} from "react-redux";
+import {close as closeBackdrop, open as openBackdrop} from '../store/backdropSlice';
+import {open as openModal} from "../store/modalSlice";
 
 const ShowTask = () => {
 
     const {address} = useParams();
+    const dispatch = useDispatch();
+    const {isConnected} = useAccount();
 
     const taskContract = {
         address: address,
         abi: rewardTaskJson.abi,
     }
 
-    const {data} = useContractReads({
+    const {data, refetch} = useContractReads({
         contracts: [
             {
                 ...taskContract,
@@ -35,14 +40,39 @@ const ShowTask = () => {
         ],
     });
 
-    const isDisabled = data ? data[3] !== ethers.constants.AddressZero : true;
+    const isDisabled = isConnected && data ? data[3] !== ethers.constants.AddressZero : true;
 
     const {config} = usePrepareContractWrite({
         ...taskContract,
         functionName: 'completeTask',
     });
 
-    const {write} = useContractWrite(config);
+    const contractWrite = useContractWrite({
+        ...config,
+        onError(error) {
+            dispatch(closeBackdrop());
+            dispatch(openModal(`Error: ${error.message}`));
+        }
+    });
+
+    useWaitForTransaction({
+        hash: contractWrite.data?.hash,
+        onError(error) {
+            dispatch(openModal(`Error: ${error.message}`));
+        },
+        onSuccess(data) {
+            dispatch(openModal(`The task is marked as COMPLETED. Waiting for owner's approval`));
+            refetch?.();
+        },
+        onSettled(data, error) {
+            dispatch(closeBackdrop());
+        }
+    });
+
+    const completeTask = () => {
+        dispatch(openBackdrop());
+        contractWrite.write?.();
+    }
 
     return (
         <Box>
@@ -68,7 +98,7 @@ const ShowTask = () => {
             <div>
                 <Button size="medium"
                         disabled={isDisabled}
-                        onClick={() => write?.()}
+                        onClick={() => completeTask()}
                         variant="contained">
                     Mark as completed
                 </Button>

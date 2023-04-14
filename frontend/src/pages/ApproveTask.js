@@ -1,15 +1,21 @@
 import {Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography} from "@mui/material";
-import {useContractReads, useContractWrite, usePrepareContractWrite} from "wagmi";
+import {useAccount, useContractReads, useContractWrite, usePrepareContractWrite, useWaitForTransaction} from "wagmi";
 import rewardTaskJson from "taskAbiJson";
 import managementTaskJson from "managementAbiJson";
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {formatUnits} from "ethers/lib/utils";
 import {ethers} from "ethers";
 import {REWARD_MANAGEMENT_CONTRACT_ADDRESS} from "../constants";
+import {useDispatch} from "react-redux";
+import {close as closeBackdrop, open as openBackdrop} from '../store/backdropSlice';
+import {open as openModal} from "../store/modalSlice";
 
 const ApproveTask = () => {
 
     const {address} = useParams();
+    const {isConnected} = useAccount();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const taskContract = {
         address: address,
@@ -21,7 +27,7 @@ const ApproveTask = () => {
         abi: managementTaskJson.abi,
     }
 
-    const {data} = useContractReads({
+    const {data, refetch} = useContractReads({
         contracts: [
             {
                 ...taskContract,
@@ -42,7 +48,7 @@ const ApproveTask = () => {
         ],
     });
 
-    const isDisabled = !data || data[3] === ethers.constants.AddressZero;
+    const isDisabled = !isConnected || !data || data[3] === ethers.constants.AddressZero;
 
     const {config: approveConfig} = usePrepareContractWrite({
         ...managementContract,
@@ -56,8 +62,58 @@ const ApproveTask = () => {
         args: [address]
     });
 
-    const {write: approveAction} = useContractWrite(approveConfig);
-    const {write: rejectAction} = useContractWrite(rejectConfig);
+    const approveAction = useContractWrite({
+        ...approveConfig,
+        onError(error) {
+            dispatch(closeBackdrop());
+            dispatch(openModal(`Error: ${error.message}`));
+        }
+    });
+    const rejectAction = useContractWrite({
+        ...rejectConfig,
+        onError(error) {
+            dispatch(closeBackdrop());
+            dispatch(openModal(`Error: ${error.message}`));
+        }
+    });
+
+    const approve = () => {
+        dispatch(openBackdrop());
+        approveAction.write?.()
+    }
+
+    const reject = () => {
+        dispatch(openBackdrop());
+        rejectAction.write?.()
+    }
+
+    useWaitForTransaction({
+        hash: approveAction.data?.hash,
+        onError(error) {
+            dispatch(openModal(`Error: ${error.message}`));
+        },
+        onSuccess(data) {
+            dispatch(openModal(`The task was APPROVED`));
+            navigate('/mytasks');
+        },
+        onSettled(data, error) {
+            dispatch(closeBackdrop());
+        }
+    });
+
+    useWaitForTransaction({
+        hash: rejectAction.data?.hash,
+        onError(error) {
+            dispatch(openModal(`Error: ${error.message}`));
+        },
+        onSuccess(data) {
+            dispatch(openModal(`The task was REJECTED`));
+            refetch?.();
+        },
+        onSettled(data, error) {
+            dispatch(closeBackdrop());
+        }
+    });
 
     return (
         <Box>
@@ -88,13 +144,13 @@ const ApproveTask = () => {
             <div>
                 <Button size="medium"
                         disabled={isDisabled}
-                        onClick={() => approveAction?.()}
+                        onClick={() => approve()}
                         variant="contained">
                     Approve
                 </Button>
                 <Button size="medium"
                         disabled={isDisabled}
-                        onClick={() => rejectAction?.()}
+                        onClick={() => reject()}
                         variant="contained">
                     Reject
                 </Button>
