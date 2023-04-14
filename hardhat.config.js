@@ -4,6 +4,7 @@ require('dotenv').config()
 const BNB_TESTNET_RPC_URL = process.env.BNB_TESTNET_RPC_URL;
 const BNB_TESTNET_PRIVATE_KEY = process.env.BNB_TESTNET_PRIVATE_KEY;
 const BSCSCAN_API_KEY = process.env.BSCSCAN_API_KEY;
+const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY;
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
@@ -19,5 +20,11 @@ module.exports = {
     },
     etherscan: {
         apiKey: BSCSCAN_API_KEY
+    },
+    gasReporter: {
+        currency: 'USD',
+        token: 'BNB',
+        gasPriceApi: 'https://api.bscscan.com/api?module=proxy&action=eth_gasPrice',
+        coinmarketcap: COINMARKETCAP_API_KEY
     }
 };
